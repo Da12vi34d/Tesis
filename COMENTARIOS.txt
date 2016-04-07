@@ -1,0 +1,11 @@
+
+----oOo----
+16-02-19
+
+Modelación:
+Variaciones
+y_t = 100 * (p_t-p_{t-1}) / p_{t-1}
+
+p_t : precio futuros o corriente
+
+Referencia: Coles (2001) "An Introduction to Statistical Modeling of Extreme Values." Springer.  

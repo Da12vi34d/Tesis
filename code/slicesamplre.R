@@ -55,6 +55,7 @@ uni.slice.alt <- function (x0, g, w=1, m=Inf, lower=-Inf, upper=+Inf, gx0=NULL)
 {
   # Check the validity of the arguments.
 
+  
   if (!is.numeric(x0) || length(x0)!=1
    || !is.function(g) 
    || !is.numeric(w) || length(w)!=1 || w<=0 
@@ -163,9 +164,9 @@ uni.slice.alt <- function (x0, g, w=1, m=Inf, lower=-Inf, upper=+Inf, gx0=NULL)
 
   # Return the point sampled, with its log density attached as an attribute.
 
-  attr(x1,"log.density") <- gx1
-  attr(x1,"uni.slice.evals") <- uni.slice.evals
-  attr(x1,"uni.slice.calls") <- uni.slice.calls
+  #attr(x1,"log.density") <- gx1
+  #attr(x1,"uni.slice.evals") <- uni.slice.evals
+  #attr(x1,"uni.slice.calls") <- uni.slice.calls
   return (x1)
   
 }

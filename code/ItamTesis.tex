@@ -232,12 +232,7 @@ Luego, por el teorema de Fubinni:
 \begin{equation*}
 \int_{0}^{\infty}f_{u}(u)u\mu du=\mu\int_{0}^{\infty}f_{u}(u)du=\mu E[u]
 \end{equation*}
- Mientras que por el anexo $4$ se tiene que: 
- \begin{equation*}
- Cov(X)=E[Cov(X|u)]+Cov[E[X|u]]=E[\Sigma]+Cov[u\mu]=\Sigma + var(u)\mu \mu'  
- \end{equation*}
- 
- Siempre y cuando el segundo momento de $X$ y $u$ existan. Así, la variable de mezcla influye en la localización y disperción del vector aleatorio $X$. Este tipo de mezcla nos permite modelar conjuntos de datos que sigan alguna tendencia con una disperción constante, como se ilustra en la gráfica 1. Por otra parte , una de las mayores difícultades es que,salvo en algunas excepciones, no siempre existe una forma cerrada para la densidad de $X$, por lo que tendría que ser aproximada mediante algún método númerico.\\
+ mientras que $Cov(X)=E[Cov(X|u)]+Cov[E[X|u]]=E[\Sigma]+Cov[u\mu]=\Sigma + var(u)\mu \mu\acute{}$ por el teorema de varianza iterada. Siempre y cuando el segundo momento de $X$ y $u$ existan. Así, la variable de mezcla influye en la localización y disperción del vector aleatorio $X$. Este tipo de mezcla nos permite modelar conjuntos de datos que sigan alguna tendencia con una disperción constante, como se ilustra en la gráfica 1. Por otra parte , una de las mayores difícultades es que,salvo en algunas excepciones, no siempre existe una forma cerrada para la densidad de $X$, por lo que tendría que ser aproximada mediante algún método númerico.\\
 
 Mediante un proceso de simulación se generaron las siguientes gráficas. La gráfica a) proviene de una variable de mezcla exponencial con parámetro $\lambda=1.5$, la gráfica b) proviene de una variable de mezcla gamma con parámetros $\alpha=20$, $\beta=5$, la gráfica c) provine de una variable de mezcla pareto con parámetros $\theta=5$, $\alpha=2$, la gráfica d) proviene de una variable de mezcla Ji-cuadrada con 20 grados de libertad.\\
 
@@ -272,18 +267,11 @@ En la siguiente figura se observa como se modifica tanto la densidad como los co
 \includegraphics[width=0.7\linewidth]{sv1}
 \end{figure}
 
-Ahora considerando la distribución de $X$, mediante el anexo 4, es fácil probar que: 
-\begin{equation*}
-E[X]=\mu
-\end{equation*}
-\begin{equation*}
-COV[X]=COV_{u}(E_{x}(X|u)) + E_{x}(COV_{u}(X|u))=E(u)\Sigma E(u)'
-\end{equation*}
-  Por lo que la distribución de $X$ estará centrada en el mismo vector de medias que $X$ dado $u$, mientras que la matriz de covarianzas será proporcional a la matriz de varianza covarianza de $X$ dado u.\\
+Ahora considerando la distribución de $X$, es fácil probar que $E[X]=\mu$, y que $Cov[X]=E[u]\Sigma$, por lo que la distribución de $X$ estará centrada en el mismo vector de medias que $X$ dado $u$, mientras que la matriz de covarianzas será proporcional a la matriz de varianza covarianza de $X$ dado u.\\
 
 Ahora se ilustrará, mediante muestras aleatorias, que efecto tiene el condicionamiento en u de la distribución de $X$, adviértase que a diferencia del condicionamiento en media, los datos solo se concentran alrededor del vector de medias $\mu$, pues $E[X]=E[X|u]$, perdiendo la trayectoria del vector de medias, por lo que intuitivamente podemos pensar que $u\mu$ del modelo de mezcla en media generá un vector de trayectoria para las observaciones de $X$.\\
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{varianzaexp}
 \caption{Se tomaron las mismas distribuciones y parámetros que las gráficas de mezcla en esperanza, pero ahora la variable de mezcla solamente afectó a la matriz de varianza-covarianza.}
@@ -300,13 +288,12 @@ Se dice que un vector aleatorio $X\in R^{p}$ es un vector tipo mezcla p dimensio
 
 Por lo que la distribución de $X$ está dada por:
 
-\begin{equation*}
+\begin{equation}
 f(x)=\underset{S_{u}}{\int}\dfrac{1}{(2\pi)^{n/2}|u\Sigma|^{n/2}}\exp{-\dfrac{1}{2}(x-\mu-uB)\acute{}u\Sigma^{-1}(x-\mu-uB)}f(u)du 
-\end{equation*}
+\end{equation}
 
 Si nos concentramos en la distribución marginal de $X$ dado $u$, podemos notar que ahora para cada realización  $u_{i}$, la densidad de $X$ dado $u_{i}$ estará centrado en el vector $\mu + u_{i}\beta$, y conforme $u_{i}$ tome valores más grandes, la densidad de $X/u_{i}$ se desplazará en dirección del vector $u_{i}\beta$ cada vez con mayor disperción, lo cual se ilustra en la siguiente figura.\\
-
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{bm}
 \caption{Nuevamente se asumió que u se distribuyó exponencial tomando los valores 1, 3 y 6, mientras que m=(5,10), B=(9,11), y la matriz de varianza covarianza fue la misma que en los ejemplos anteriores.}
@@ -314,19 +301,10 @@ Si nos concentramos en la distribución marginal de $X$ dado $u$, podemos notar 
 
 
 
-En la distribución de $X$ podemos considerar a $\mu$ como un vector de posición, mientras que $u\beta$ es un vector de dirección o tendencia al rededor del cual estarían las observaciones de $X$, mientras que los datos conservarán la estructura de correlación inherenta a $\Sigma$, pero además estarán dispersos en proporción a la esperanza de la variable de mezcla $u$, más alguna constante que depende de$u$. Entonces, considerando el anexo 4,  la esperanza y covarianza del vector $X$ son de la siguiente forma:
+En la distribución de $X$ podemos considerar a $\mu$ como un vector de posición, mientras que $u\beta$ es un vector de dirección o tendencia.
 
-\begin{equation*}
-E(X)=E_{u}(E_{x}(x|u))=E_{u}(\mu + u\beta)=\mu+E(u)\beta
-\end{equation*}
-\begin{equation*}
-COV(X)=COV_{u}(E_{x}(X|u)) + E_{u}(COV_{x}(X|u))=
-\end{equation*}
-\begin{equation*}
-COV_{u}(\mu + u\beta) + E_{u}(u\Sigma)=Var(u)\beta \beta' + E(u)\Sigma
-\end{equation*}
 
-Una propiedad importante de las variables de mezcla, es que el comportamiento de la cola del vector aleatorio $X$ dependende del comportamiento de la cola de la variable de mezcla $u$, por lo que se podría seleccionar alguna $u$ arbitraria para que $X$ tenga colas pesadas.\\
+Una propiedad importante de las variables de mezcla, es que el comportamiento de la cola del vector aleatorio $X$ dependende del comportamiento de la cola de la variable de mezcla $u$, por lo que se podría seleccionar alguna $u$ arbitraria para que $X$ tenga colas pesadas.
 
 Y además, como se verá posteriormente, la función generadora de momentos $M_{x}(t)$ del vector aleatorio X es proporcional a $M_{u}(t)$, la función generadora de momentos de la variable de mezcla u. Y la función característica $\Phi_{x}(it)$ es proporcinal a la función característica de la variable de mezcla u, $\Phi_{u}(it)$.\\
 
@@ -505,7 +483,7 @@ computacionalmente el algoritmo se vería de la siguiente forma:\\
 
 \section*{Inferencia de los parámetros de una distribución Hiperbólica generalizada}
 
-Supongamos que tenemos una colección de $r_{n}$ datos, donde cada $r_{i}\in R^{p}$, de los cuales tenemos motivos para creer que fueron generados por una distribución hiperbólica generalizada p-variada. Entonces nos interesaría inferir los valores de los parámetros de dicha distribución, pero antes de ello sería conveniente expreasar a nuestra distribución de interés como una distribución tipo mezcla normal, con variable de mezcla $u$ distribuidad gaussiana inversa (GI), por lo que así podemos replantear el problema, enfocandonos en buscar los parámetros de la distribución de mezcla, $\mu,\beta,\Sigma$.\\
+Supongamos que tenemos una colección de $r_{n}$ datos, donde cada $r_{i}\in R^{p}$, de los cuales tenemos motivos para creer que fueron generados por una distribución hiperbólica generalizada p-variada. Entonces nos interesaría inferir los valores de los parámetros de dicha distribución, pero antes de ello sería conveniente expreasar a nuestra distribución de interés como una distribución tipo mezcla normal, con variable de mezcla $u$ distribuidad gaussiana inversa generalizada (GIG), por lo que así podemos replantear el problema, enfocandonos en buscar los parámetros de la distribución de mezcla, $\mu,\beta,\Sigma$.\\
 
 Ahora sobre un enfoque bayesiano, podemos plantear la verosimilitud de la distribución aposteriori de $\mu,\beta,\Sigma$, es decir:
 \begin{equation*}
@@ -515,59 +493,26 @@ Donde $\Pi(\mu,\beta,\Sigma)$ es la distribución conjunta a priori de $\mu,\bet
 \begin{equation*}
 f(\mu,\beta,\Sigma|(r_{i})_{i=1}^{n})=\prod_{i=1}^{n}f_{r_{i}}(r_{i}|\mu,\beta,\Sigma)\Pi(\mu|\mu_{0},\Sigma_{0})\Pi(\beta|\mu_{\beta},\Sigma_{\beta})\Pi(\Sigma|S)
 \end{equation*}
- Como supuesto adicional, asumiremos que $\mu$ se distribuye $N(\mu_{0},\Sigma_{0})$, $\beta$ se distribuye $N(\beta_{0},\Sigma_{\beta})$, y $\Sigma$ se distribuye $W^{-1}(S,n,p)$. Por lo que nuestra función de verosimilitud adquiere la siguiente forma:
+ Como supuesto adicional, asumiremos que $\mu$ se distribuye $N(\mu_{0},\Sigma_{0})$, $\beta$ se distribuye $N(\beta_{0},\Sigma_{\beta})$, y $\Sigma$ se distribuye $W(S)$. Por lo que nuestra función de verosimilitud adquiere la siguiente forma:
 \begin{equation*}
 Lik(\mu,\mu_{0},\beta,\beta_{0},\Sigma,\Sigma_{0},\Sigma_{\beta},S|(r_{i})_{i=1}^{n})=
 \end{equation*}
-Luego, expresando a nuestra distribución de interés $f_{r_{i}}(r_{i})$ como una distribución tipo mezcla normal, con variable de mezcla $u$, tenemos que la función de verosimilitud tiene la sigueinte forma:
- 
 \begin{equation*}
-\prod_{i=1}^{n}\int_{0}^{\infty}N_{p}(r_{i}|\mu,u\beta,u\Sigma)GI(u|\lambda_{0},\Psi_{0})du N_{p}(\mu|\mu_{0},\Sigma_{0})N_{p}(\beta|\beta_{0},\Sigma_{\beta})W_{pxp}(\Sigma|S)
-\end{equation*}
-
-Pro lo que ahora necesitamos conocer también los valores de $\lambda$ y $\Psi$ propios de la distribución gaussiana inversa, para ello asumiremos que $\lambda$ y $\psi$ son independientes, y además por la gran flexibilidad de la distribución gamma, asumiremos que cada uno de ellos proviene de una distribución gamma con parámetros $\alpha_{\lambda}$, $\beta_{\lambda}$, $\alpha_{\Psi}$ y $\beta_{\Psi}$, respectivamente, por lo que la dostribución apriori para $\lambda$ y $\Psi$ está dada de la siguiente manera:
-
-\begin{equation*}
-\Pi(\lambda,\Psi)=\Pi(\lambda|\alpha_{\lambda},\beta_{\lambda})\Pi(\Psi|\alpha_{\Psi},\beta_{\Psi})
+\prod_{i=1}^{n}\int_{0}^{\infty}N_{p}(r_{i}|\mu,u\beta,u\Sigma)GIG(u|\lambda_{0},\xi_{0},\Psi_{0})du N_{p}(\mu|\mu_{0},\Sigma_{0})N_{p}(\beta|\beta_{0},\Sigma_{\beta})W_{pxp}(\Sigma|S)
 \end{equation*}
 
 Ahora según lo expuesto en el capítulo 3.algo, es conveniente extender la verosimilitud, por lo que ahora tenemos que:
 \begin{equation*}
-Lik(\mu,\beta,\Sigma,(u_{i})_{i=1}^{n},\lambda,\Psi|(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi})=
+Lik(\mu,\mu_{0},\beta,\beta_{0},\Sigma,\Sigma_{0},S,(u_{i})_{i=1}^{n}|(r_{i})_{i=1}^{n})=
 \end{equation*}
 \begin{equation*}
-\prod_{i=1}^{n}N_{p}(r_{i}|\mu,u_{i}\beta,u_{i}\Sigma)GI(u_{i}|\lambda_{0},\Psi_{0})\Pi(\lambda|\alpha_{\lambda},\beta_{\lambda})\Pi(\Psi|\alpha_{\Psi},\beta_{\Psi}) 
-\end{equation*}
-\begin{equation*}
-N_{p}(\mu|\mu_{0},\Sigma_{0})N_{p}(\beta|\mu_{\beta},\Sigma_{\beta})W^{-1}_{pxp}(\Sigma|S,n,p)
-\end{equation*}
-Una vez teniendo nuestra función de verosimilitud, ya estamos en condiciones de proponer algún método númerico para encontrar los parámetros de interés; para lo cual, por un lado se utilizará el muestreador de GIBBS para obtener una muestra de los parámetros buscados, mientras que por otro lado se optará por un enfoque bayesiano para tratar la verosimilitud, ya que gracias a este método, podemos aprovechar la información implícita de los datos.\\
-
-Entonces, con un enfoque bayesiano, será necesario encontrar las distribuciones marginales de los parámetros de interés, para que una vez obtenidas se pueda implementar el muestreador de GIBBS.\\ 
-
-
-Por lo que ahora necesitamos conocer las distribuciones marginales de:
-\begin{equation*}
-\Pi(\mu|\beta,\Sigma,(u_{i})_{i=1}^{n},\lambda,\Psi,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi}) 
-\end{equation*}
-\begin{equation*}
-\Pi(\beta|\mu,\Sigma,(u_{i})_{i=1}^{n},\lambda,\Psi,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi}) 
-\end{equation*}
-\begin{equation*}
-\Pi(\Sigma|\mu,\beta,(u_{i})_{i=1}^{n},\lambda,\Psi,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi}) 
-\end{equation*}
-\begin{equation*}
-\Pi(u_{i}|\mu,\beta,\Sigma,\lambda,\Psi,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi})
-\end{equation*}
-\begin{equation*}
-\Pi(\lambda|\mu,\beta,\Sigma,(u_{i})_{i=1}^{n},\Psi,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi}) 
-\end{equation*}
-\begin{equation*}
-\Pi(\Psi|\mu,\beta,\Sigma,(u_{i})_{i=1}^{n},\lambda,(r_{i})_{i=1}^{n},\mu_{0},\beta_{0},\Sigma_{\mu},\Sigma_{\beta},S,\alpha_{\lambda},\beta_{\lambda},\alpha_{\Psi},\beta_{\Psi}) 
+\prod_{i=1}^{n}N_{p}(r_{i}|\mu,u_{i}\beta,u_{i}\Sigma)GIG(u_{i}|\lambda_{0},\xi_{0},\Psi_{0})du N_{p}(\mu|\mu_{0},\Sigma_{0})N_{p}(\beta|\mu_{\beta},\Sigma_{\beta})W_{pxp}(\Sigma|S)
 \end{equation*}
 
+Una vez teniendo nuestra función de verosimilitud, ya estamos en condiciones de proponer algún método númerico para encontrar los parámetros de interés; ya que se ha empleado el enfoque bayesiano, y por la forma de las distribuciones tipo mezcla es conveniente implementar el muestreador de Gibbs.\\
 
-\section*{Distribuciones marginales}
+Por lo que ahora necesitamos conocer las distribuciones marginales de 
+$\mu|\beta,\Sigma,(u_{i})_{i=1}^{n},(r_{i})_{i=1}^{n}$, $\beta|\mu,\Sigma,(u_{i})_{i=1}^{n},(r_{i})_{i=1}^{n}$, $\Sigma|\mu,\beta,(u_{i})_{i=1}^{n},(r_{i})_{i=1}^{n}$, y $u_{j}|\beta,\Sigma,(u_{i\ne  j})_{i=1}^{n},(r_{i})_{i=1}^{n} \forall j$, lo cual se mostrará en la siguiente parte.
 
 \subsection*{Distribución marginal de $\mu$}
 Para en contrar la distribución marginal de $\mu|\beta,\Sigma,(u_{i})_{i=1}^{n},(r_{i})_{i=1}^{n}$, a partir de la función de verosimilitud podemos tomar las densidades donde aparece $\mu$ e identificar su kernel, es decir, de: 
@@ -639,112 +584,7 @@ Y matriz de varianza covarianza:
 V\Sigma+\Sigma_{\beta}
 \end{equation*}
 
-\subsection*{Distribución marginal de $\Sigma$}
-Para encontrar la distribción marginal de $\Sigma$, a partir de la función de verosmilitud, podemos tomar las densidades donde aparece $\sigma$, y apartir de ahí, identificar el kernel correspondiente, es decir, tomando: 
-\begin{equation*}
-\prod_{i=0}^{n}N_{p}(r_{i}|\mu,u_{i}\beta,u_{i}\Sigma)W^{-1}_{pxp}(\Sigma|S,n,p)=
-\end{equation*}
-Luego trabajando con el producto de las n variables normales p-variadas correspondientes a $r_{i}$, considerando los términos que únicamente dependen de $\Sigma$, y con el cambio de variable $(x_{i}=r_{i}-\mu-\beta)/\sqrt{u_{i}}$, tenemos que:
-\begin{equation*}
-\prod_{i=1}^{n}exp(-\dfrac{1}{2}(r_{i}-\mu-u_{i}\beta)'(u_{i}\Sigma)^{-1}(r_{i}-\mu-u_{i}\beta))\dfrac{\exp(-\frac{1}{2}tr(\Sigma^{-1}S))}{|\Sigma|^{n/2}}=
-\end{equation*}
-\begin{equation*}
-\dfrac{\exp(-\frac{1}{2}\sum_{i=1}^{n}x_{i}\Sigma^{-1}\sum_{i=1}^{n}x_{i})}{|\Sigma|^{\frac{n}{2}}}\dfrac{\exp(-\frac{1}{2}tr(\Sigma^{-1}S))}{|\Sigma|^{\frac{n}{2}}}=
-\end{equation*}
-\begin{equation*}
-\dfrac{\exp(-\frac{1}{2}(X\Sigma^{-1}X + tr(\Sigma^{-1}S)))}{|\Sigma|^{n}}=\dfrac{\exp(-\frac{1}{2}(tr(\Sigma^{-1}XX') + tr(\Sigma^{-1}S))))}{|\Sigma|^{n}}=
-\end{equation*}
-\begin{equation*}
-\dfrac{\exp(-\frac{1}{2}(tr(\Sigma^{-1}(XX' + S))))}{|\Sigma|^{n}}
-\end{equation*}
-Haciendo $X=\sum_{i=1}^{n}x_{i}$, y ya que $X\Sigma^{-1}X=tr(\Sigma^{-1}(XX')) $. La última expresión corresponde al kernel de una distribución Whishart con matriz de escala $XX'+ S$, y $2n$ grados de libertad.
-\section*{Distribución marginal de $\lambda$}
-Para encontrar la distribción marginal de $\lambda$, a partir de la función de verosmilitud, podemos tomar las densidades donde aparece $\lambda$, y apartir de ahí, identificar el kernel correspondiente, es decir, de la sigueinte expresión:
-\begin{equation*}
-\prod_{i=1}^{n}GI(u_{i}|\lambda,\Psi)\Pi(\lambda|\alpha_{\lambda},\beta_{\lambda})
-\end{equation*}
-nos quedamos con:
-\begin{equation*}
-\prod_{i=1}^{n}\sqrt{\lambda}\exp(-\frac{\lambda(u_{i}-\Psi)^{2}}{2\Psi^{2}u_{i}}\lambda^{\beta_{\lambda}-1}\exp(-\lambda\alpha_{\lambda})\alpha
-\end{equation*}
-\begin{equation*}
-\lambda^{n/2+\beta_{\lambda} -1}\exp(-X\lambda)
-\end{equation*}
-donde $X=\sum_{i=1}^{n}\dfrac{(u_{i}-\Psi)^{2}}{2\Psi^{2}u_{i}} - \alpha_{\lambda}$
-Por lo que tenemos que el kernel correponde a una distribución gamma, por lo tanto $\lambda$ se distribuye gamma con parámetros $(\frac{n}{2}+\beta_{\lambda}),X$.
-
-\section*{Distribución marginal de $\Psi$}
-Para encontrar la distribción marginal de $\Psi$, a partir de la función de verosmilitud, podemos tomar las densidades donde aparece $\Psi$, y apartir de ahí identificar el kernel correspondiente, es decir, de la sigueinte expresión:
-\begin{equation*}
-	\prod_{i=1}^{n}GI(u_{i}|\lambda,\Psi)\Pi(\Psi|\alpha_{\Psi},\beta_{\Psi})
-\end{equation*}
-nos quedamos con:
-\begin{equation*}
-	\prod_{i=1}^{n}\sqrt{\lambda}\exp(-\frac{\lambda(u_{i}-\Psi)^{2}}{2\Psi^{2}u_{i}})\Psi^{\beta_{\Psi}-1}\exp(-\Psi\alpha_{\Psi}) \alpha
-\end{equation*}
-\begin{equation*}
-\exp(-\sum_{i=1}^{n}\frac{\lambda(u_{i}-\Psi)^{2}}{2\Psi^{2}u_{i}})\Psi^{\beta_{\Psi}-1}\exp(-\Psi\alpha_{\Psi}) \alpha
-\end{equation*}
-\\
-El kernel obtenido resulta difícil de identificar, y tal vez sea complicado obtener la densidad condicional  de $\Psi$, cosa que es necesaria para implementar el muestreador de GIBBS, por lo que se atacará este problema por medio de una herramienta útil en simulación, llamada slice sampler; la ventaja de utilizar el slice sampler es que nos permite obtener una muestra aleatoria de algúna distribución de probabilidad, con tan solo conocer su Kernel, por lo que a continuación se hablará un poco sobre la idea intuitiva que hay detrás del slice sampler.
-
-\subsection*{Slice Sampler}
-
-Los métodos de simulación slice sampler consisten en generar una cadena de markov que converja a la distribución que se desea muestrear. La idea intuitiva de estos métodos consiste en suponer que que el vector aleatorio bivariado $(X,Y)$ se distribuye uniforme en la región que está por debajo de la función de densidad, de la cual obtenríamos una muestra $(X_{0},Y_{0})$, y de está solo nos quedariamos con $X_{0}$, siendo esta nuestra variable de interés.\\ 
-
-Ahora,para generar una muestra uniforme en dicha región, se utiliza un algoritmo recursivo con el fin de tener una cadena de markov que converga a la muestra deseada.\\
-
-En términos ilustrativos el procedimiento es como sigue:\\
-
-$1)$ Supongamos que tenemos el kernel o una densidad de una variable aleatoria univarada $X$, de la cual nos interesaría obtener una muestra aleatoria, y que además la gráfica de esta densidad es de la siguiente manera:
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{Slicesampler1}
-\caption{}
-\label{Grafica}
-\end{figure}
-
-\bigskip
-$2)$ Luego definimos el vector aleatorio bivariado $(X,Y)$, el cual suponemos que se distribuye uniforme en la región que está por debajo de la gráfica anterior, y a esta región la denotamos como $U$, por lo que $U$ sería el conjunto de parejas $(x,y)$ con la propiedad de que $x$ es menor a $y$, siendo $y=f(x)$.\\ Enonces la región de la cual nos interesa obtener una muestra se ve de la siguiente forma:
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{gs2}
-\caption{}
-\label{fig:gs2}
-\end{figure}
-
-\bigskip
-$3)$ Luego proponemos un valor inicial $x_{0}$, y por el anexo (algo), si un vector aleatorio bivariado se distribuye uniforme en alguna región, entonces para cada valor que tome la variable $X$, la distribución marginal de $Y$ dado $X=x_{0}$ se distribuye uniforme dentro del segmento de recta $L(y)=((y,x_{0}) | y\in R)$, donde $L(y)$ está dentro de $U$. Entonces de esta manera, podríamos generar una realización de $Y$ dado $x_{0}$, así obtendríamos algún valor $y_{0}$, después fijamos esta valor $y_{0}$, y tendriamos ahora que $X$ dado $y_{0}$ se distribuye uniforme en $U\cap  L(x)=((x,y_{0})|x\in R)$, por lo que ahora obtendríamos una realización de $X$ dado $y_{0}$ de donde obtenríamos nuevamente un valor $x_{0}$, y así repeririamos el proceso, pues de esta manera teneomos una cadena de markov que converge a la realización de haber obtenido una muestra uniforme sobre $U$, donde solo nos interesa el valor de $X$.\\
-En la siguiente gráfica se ilustra el punto $3)$.
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{gs3}
-\caption{Por simplicidad se asumió que el primer valor que tomó la variable X, fue 0, luego Y dado x igual a cero se distribuye uniforme en el intervalo (0,1200), de donde ahora obtenemos una realización de Y dado x igual a cero, donde Y tomó ahora el valor de 500, con esta nueva información actualizamos el valor de Y, por lo que ahora obtenemos una realización de X dado Y igual a 500, y así seguimos actualizando los valores de X y Y hasta obtener la muestra deseada.}
-\label{fig:gs3}
-\end{figure}
-
-\section*{Distribución marginal de $u_{i}$}
-Para encontrar la distribción marginal de $u_{i}$, a partir de la función de verosmilitud, podemos tomar las densidades donde aparece $u_{i}$, y apartir de ahí identificar el kernel correspondiente, es decir, de la sigueinte expresión:
-
-\begin{equation*}
-\prod_{i=1}^{n}N_{p}(r_{i}|\mu,u_{i}\beta,u_{i}\Sigma)GI(u_{i}|\lambda,\Psi)
-\end{equation*}
-
-nos quedamos con:
-
-\begin{equation*}
-\dfrac{exp(-\frac{1}{2}(r_{i}-\mu-u_{i}\beta)'(u_{i}\Sigma)^{-1}(r_{i}-\mu-u_{i}\beta))}{(u_{i})^{p/2}}\sqrt{\dfrac{1}{u_{i} ^{3}}}\exp(-\dfrac{\lambda(u_{i}-\Psi)^{2}}{2\Psi^{2}u_{i}})
-\end{equation*}
-
-EL kernel anterior parece muy difícil de identificar, e intentar encontrar la forma anallitica de la distribución condicionada de $u_{i}$ puede resultar muy difícil, si no es que imposible, por lo que optaremos por obtener una muestra aleatoria de $u_{i}$ por medio del slice sampler.
-
-Una vez descrita la metodología a emplear para inferir los parámetros de nuesta muestra de interés, ya estamos en condiciones de programar el muestreador de GIBBS y emplearlo para estudiar un conjunto de datos, lo cual se llevará acabo en el siguiente capítulo.
-
-\chapter*{Caso de estudio}
-
-
+\pagebreak
 
 \section*{Distribución Gaussiana inversa generalizada}
 Se dice que $X$ tiene una distribución gaussiana inversa generalizada $N\tilde{}(\lambda,\xi,\Psi)$, si su densidad es de la siguiente forma:
@@ -779,14 +619,6 @@ Por lo tanto:
 \begin{equation*}
 E[X^{r}]=(\frac{\xi}{\Psi})^{\frac{r}{2}}\frac{\kappa_{\lambda+r}(\sqrt{\xi \Psi})}{\sqrt{\kappa_{\lambda}(\sqrt{\xi\Psi})}}
 \end{equation*}
-
-\section*{Distribución Gaussiana inversa}
-Se dice que el vector aleatorio $X$ de dimención $p$ tiene una distribución Gaussiana inversa $GI(\Psi,\lambda)$, si su función de densidad es de la siguiente forma:
-\begin{equation*}
-f_{x}(X)=\sqrt{\dfrac{\lambda}{2\pi x^{3}}}\exp(-\dfrac{\lambda(x-\Psi)^{2}}{2\Psi^{2}x})
-\end{equation*}
-Para $\lambda$, $\mu$ y $X$ mayores a cero.
-
 \section*{Distribución Hiperbólica Generalizada}
 Se dice que el vector p variado $X$ tiene una distribución hiperbólica generalizada $GH_{p}(\lambda,\xi,\Psi,\mu,\Sigma,\beta)$ si su densidad es de la siguiente forma:
 \begin{equation*}
@@ -855,7 +687,7 @@ $GH_{p}(\lambda,\xi,\Psi,\mu_{i},\Sigma _{i},\beta_{i})$, donde $\Sigma_{i}$ es 
 
 
 \chapter*{Anexos}
-\section{Distribución normal p variada}
+\section*{Distribución normal p variada}
 Se dice que el vector aleatorio $X\in R^{p}$ tiene una distribución normal p-variada $N_{p}(X|\mu,\Sigma)$ si su densidad es de la siguiente forma:
 \begin{equation*}
 f(X|\mu,\Sigma)=\dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}exp(-1/2(X-\mu)'\Sigma^{-1}(X-\mu))
@@ -863,22 +695,7 @@ f(X|\mu,\Sigma)=\dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}exp(-1/2(X-\mu)'\Sigma^{-1}
 
 Donde $\mu\in R^{p}$ es elvector de medias, y $\Sigma\in M_{pxp}$ es la matriz de varianza-covarianza.
 
-\section{Distribución Wishart}
-Se dice que una matriz $S\in M_{pxp}$, simétrica y positiva definida, se distribuye Whisart con n grados de libertad, $W(\Sigma,n,p)$, si su densidad es de la siguiente forma:
-\begin{equation*}
-f_{S}(S)= (2^{np/2}\pi ^{p(p-1)/4}\prod_{i=1}^{p}\gamma(\dfrac{n+1-i}{2}))^{-1}\frac{|S|^{(n-p-1)/2}}{|\Sigma|^{n/2}}\exp(-\frac{1}{2}tr(\Sigma^{-1}S))
-\end{equation*}
-Donde $\Sigma \in M_{pxp}$ es simétrica y positiva definida, y se le conoce como matriz de escala, y con $n$ mayor a $p$.
-
-\section{Distribución inversa Wishart}
-Se dice que una matriz $G \in M_{pxp}$, simétrica y positiva definida, se distribuye whishart inversa con n grados de libertad, $W^{-1}(K,n,p)$, si su densidad es de la siguiente forma:
-\begin{equation*}
-f_{G}(G)=(2^{(n-p-1)p/2}\pi^{p(p-1)/4}\prod_{i=1}^{p}\gamma(\frac{n-p-i}{2}))^{-1}\frac{|K|^{(n-p-1)/2}}{|G|^{n/2}}\exp(-\frac{1}{2}tr(G^{-1}K))
-\end{equation*}
-Donde a $K$ se le conoce como matriz de escala, y es simétrica y definida positiva.
-Es importante notar que si alguna matriz aleatoria $\Sigma \in M_{pxp}$ se distribuye Whisart con matriz de escala $S$, y con n grados de libertad, entonces $\Sigma^{-1}$ se distribuye inversa whisart con matriz de escala $S^{-1}$, y con $n+p+1$ grados de libertad.
-
-\section{Distribución tipo mezla normal p variada}
+\section*{Distribución tipo mezla normal p variada}
 Se dice que el vector aleatorio $X\in R^{p}$ con densidad f(x) puede ser expresado como una distribución de mezcla normal $N(X|\mu,\beta,\Sigma)$ con variable de mezcla $u$ con densidad $f(u)$ y soporte en $R^{+}$, si:
 \begin{equation*}
 f(X|\mu,\beta,\Sigma)=\underset{0}{\overset{\infty }{\int }}N_{p}(X|\mu,u\beta,u\Sigma)f_{u}(u)du 
@@ -886,57 +703,7 @@ f(X|\mu,\beta,\Sigma)=\underset{0}{\overset{\infty }{\int }}N_{p}(X|\mu,u\beta,u
 
 Donde, $N_{p}(X|\mu,u\beta,u\Sigma)$ es una distribución normal p-variada con vector de medias $\mu+u\beta$, y matriz de varianza-covarianza $u\Sigma$
 
-\section{Covarianza de un vector aleatorio p variado}
-Se define la covarianza de un vector aleatorio p variado como:
-\begin{equation*}
-COV(X)=E((X-\mu)(X-\mu)')
-\end{equation*}
-Siempre y cuando el vector de medias (del vector aleatorio $X$) $\mu$ exista.
-
-\section{Covarianza de una distribución tipo mezcla}
-Sea $X$ dado $u$ una distribución tipo mezcla de dimención p, y $u$ una variable de mezcla con soporte
-en $R_{+}$, entonces la covarianza de $X$ se puede calcular como:
-\begin{equation*}
-COV(X)=E_{u}(COV(X|u))-COV_{u}(E(X|u))
-\end{equation*}
-Demostración:
-De la definición de $COV(X)$ tenemos que:
-\begin{equation*}
-COV(X)=E_{x}((X-\mu)(X-\mu)')=E_{x}(XX'-2X\mu+\mu\mu')=
-\end{equation*}
-\begin{equation*}
-E_{x}(XX')-2E(X)\mu+\mu\mu'=E_{x}(XX')-E_{x}(X)E_{x}(X)'=
-\end{equation*}
-\begin{equation*}
-E_{x}(XX')-E(X)_{x}E_{x}(X)'+E(X)_{x}E(X)_{x}'-2E(X)_{x}E(X)_{x}'+E(X)_{x}E(X)_{x}=
-\end{equation*}
-\begin{equation*}
-=E_{u}(E_{x}(XX'|u)-E_{x}(X|u)E_{x}(X|u)')+E_{u}(E_{x}(X|u)E_{x}(X|u)')-
-\end{equation*}
-\begin{equation*}
-2E_{u}(E_{x}(X|u)E(X)')+E_{u}(E(X|u))E_{u}(E(X|U))=
-\end{equation*}
-\begin{equation*}
-E_{u}(E_{x}(XX'|u)-2E_{x}(X|u)E_{x}(x|u)'+E_{x}(X|u)E_{x}(X|u)') +
-\end{equation*}
-\begin{equation*}
-E_{u}(E_(X|u)E_{x}(X|u)'-2E_{x}(X|u)E_{u}(E_{x}(X|u))+E_{u}E_{x}(X|u)E_{u}E_{x}(X|u)')=
-\end{equation*}
-\begin{equation*}
-E_{u}(E_{x}(XX'-2XE_{x}(X|u)+E_{x}(X|u)E_{x}(X|U)) +
-\end{equation*}
-\begin{equation*}
-E_{u}((E_{x}(X|u)-E_{u}(E_{x}(X|u)))(E_{x}(X|u)-E_{u}(E_{x}(X|u)))')=
-\end{equation*}
-\begin{equation*}
-E_{u}((E_{x}(X)-E_{x}(X|u))(E_{x}(X)-E_{x}(X|u))') + COV_{u}(E_{x}(X|u))=
-\end{equation*}
-\begin{equation*}
-E_{u}(COV_{x}(X|u)) + COV_{u}(E_{x}(X|u)).
-\end{equation*}
-
-
-\section{Kernel de una distribución normal p variada}
+\section*{Kernel de una distribución normal p variada}
 El kernel un vector aleatorio es la parte de la función de densidad que únicamente depende de dicho vector, y a su vez nos permite identificar de que familia proviene la distribución. Por ejemplo, en el caso de la distribución normal p variada
 \begin{equation*}
 f(X|\mu,\Sigma)=\dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}exp(-\dfrac{1}{2}(x'\Sigma^{-1}x - x'\Sigma^{-1}\mu -\mu'\Sigma^{-1}x+\mu'\Sigma^{-1}\mu))
@@ -946,14 +713,7 @@ Tenemos que el Kernel correspondiente es:
 exp(-\dfrac{1}{2}(x'\Sigma^{-1}x -2x'\Sigma^{-1}\mu))
 \end{equation*}
 donde $\mu'\Sigma^{-1}x=x'\Sigma^{-1}\mu$, ya que es una forma cuadrática.
-
-\section{Kernel de una distribución Wishart}
-Análogamente al caso normal p variado, si nos concentramos en la parte de la densidad Wishart, con matriz de escala $S$ y con n grados de libertad, que únicamente depende de $\Sigma$, tenemos que el correspondiente kernel es:
-\begin{equation*}
-\dfrac{\exp(-\frac{1}{2}tr(\Sigma^{-1}S))}{|\Sigma|^{\frac{n}{2}}}
-\end{equation*}
-
-\section{Kernel del producto de n distribuciones normales p variadas con mismo vector de medias y misma matriz de varianza covarianza}
+\section*{Kernel del producto de n distribuciones normales p variadas con mismo vector de medias y misma matriz de varianza covarianza}
 Supongamos que $X_{i}$ se distribuye normal p variada con vector de media $\mu$ y matriz de varianza covarianza $\Sigma$, entonces la función de  interés es de la siguiente manera:
 \begin{equation*}
 \prod_{i=1}^{n}N(X_{i}|\mu,\Sigma)=\prod_{i=1}^{n}\dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}exp(-\frac{1}{2}(X_{i}-\mu)'\Sigma^{-1}(X_{i}-\mu))
@@ -970,9 +730,7 @@ Por último,como sólo nos interesan los términos donde aparece $X_{i}$, llegam
 \begin{equation*}
 exp(-\frac{1}{2}(X'\Sigma^{-1}X-2X'\Sigma^{-1}\mu))
 \end{equation*} 
-
-\section{Kernel del vector de medias de una distribución normal p variada multiplicada por la distribución del vector de medias}
-
+\section*{Kernel del vector de medias de una distribución normal p variada multiplicada por la distribución del vector de medias}
 En este caso tenemos que $X$ se ditribuye normal con vector de medias $\mu$ y matriz de varianza covarianza $\Sigma$, mientras que $\mu$ se distribuye normal con vector de medias $\mu_{0}$ y matriz de varianza covarianza $\Sigma_{0}$, y ahora nos interesa conocer el Kernel correspondiente a $\mu$, entonces tendríamos
 que el producto de las funciones de densidad es:
 \begin{equation*}

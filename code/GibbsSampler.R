@@ -70,12 +70,12 @@ r<-array(Na,dim=c(p,n))
                         f<-f+u[i]
                         
                       }
-                      a<-bf
-                      b<-af
-                      c<-linicial
-                      d<-length(u)
-                      e<-f
-                       
+                      a<<-bf
+                      b<<-af
+                      cd<<-linicial
+                      d<<-length(u)
+                      e<<-f
+                      
                       
                        finicial<-uni.slice.alt(x0, g, w=1, m=Inf, lower=-Inf, upper=+Inf, gx0=NULL)
                       

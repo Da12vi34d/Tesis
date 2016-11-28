@@ -1,5 +1,5 @@
-% evalua una función normal bivariada dada una matriz nx2 de datos, un vector de medias 
-y una matreiz de varianza-covarianza %
+# evalua una función normal bivariada dada una matriz nx2 de datos, un vector de medias 
+# y una matriz de varianza-covarianza %
 
 Normal<-function(X,M,S){
   
@@ -9,7 +9,7 @@ Normal<-function(X,M,S){
 }
 
 
-%crea una malla para graficar una superficioe normal bivariada%
+# crea una malla para graficar una superficioe normal bivariada%
 GN<-function(t,r,M,S){
   j=1
   

@@ -1,5 +1,5 @@
-VariableLatente
-lat<-function(x,rr,mmm,bb,ss,ll,ff,p){
+# VariableLatente
+lat <- function(x,rr,mmm,bb,ss,ll,ff,p){
   bb<-x*bb
   ss<-solve(x*ss)
   A<-(rr-mmm-bb)%*%ss%*%(rr-mmm-bb)
@@ -9,11 +9,10 @@ lat<-function(x,rr,mmm,bb,ss,ll,ff,p){
     x<-log(x,base=exp(1))
   else
     x<- -Inf
-  
-  x
-}
+  return(x)
+ }
 
 latente<-function(x){
   x<-lat(x,rr,mmm,bb,ss,ll,ff,p)
-  x
-  }
+  return(x)
+ }

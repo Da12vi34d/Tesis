@@ -1,5 +1,5 @@
 # devuelve el el logaritmo natural del valor de la función objetivo 
-g<-function(u,r,m,b,s,l,f){
+h<-function(u,r,m,b,s,l,f){
   x<-exp(-.5(r-m-u*b)*inv(u*s)*(r-m-u*b))*exp(-l*(u-f)^{2}/(2*f^{2}*u))*u^{-1.5-length(r)/2}
   
   if (x >0)
@@ -17,7 +17,7 @@ d<-1
 e<-1
 f<-1
 #Redefinimos la función para que solamente dependa de x
-h<-function(x){
+g<-function(x){
   x<-f(x,a,b,c,d,e,f)
   x
 }

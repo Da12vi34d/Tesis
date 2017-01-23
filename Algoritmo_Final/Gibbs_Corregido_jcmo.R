@@ -33,7 +33,7 @@ r<-t(datos1) #Transponemos la base de datos
 #-------------------------------------------
 p<<-nrow(r)
 #p<<-2   #dimensión de los vectores
-M<-1000 #Número de iteraciones
+M<-100 #Número de iteraciones
 n<<-ncol(r)
 #n<-1000 #número de observaciones
 j<-0

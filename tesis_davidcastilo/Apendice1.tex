@@ -1,0 +1,16 @@
+
+\chapter{Estimación por máxima verosimilitud}
+El método de máxima verosimilitud tiene un enfoque frecuentista, en el que los datos son generados por una función de densidad de probabilidad $f_{x}$, con la cual 
+es posible construir una función de verosimilitud, la cual tiene como argumento los parámetros a estimar, y a su vez depende de los datos ya observados. Por lo regular la función de verosimilitud se construye de acuerdo al evento, concerniente a los datos de interés, por lo que muchas veces es la misma función de densidad, pues se considera el evento en que la variable aleatoria $X_{i}$ tome el valor $x_{i}$. De manera intuitiva, la función de verosimilitud representa la probabilidad de haber observado la variable aleatoria $X$ bajo el modelo dado, la cual se pretende maximizar con respecto al parámetro de interés para así obtener qué tan probable es que el modelo dado haya generado los datos.
+
+En términos generales los estimadores máximo verosimiles se construyen de la siguiente forma:
+\begin{enumerate}
+	\item Construir la función de verosimilitud, la cual llamaremos $LIK(\Theta|X)$
+	\item Plantear el problema de maximización:  
+\begin{equation*}
+max_{\Theta}(LIK(\Theta|X))
+\end{equation*} 
+\item La solucion $\Theta *$ del problema de maximización es el estimador buscado.
+\end{enumerate}
+
+Aunque el algoritmo para encontrar estimadores máximo verosimiles parece sencillo, no siempre lo es, pues la dificultad del proceso de maximización aumenta conforme más variables se tienen, lo cual puede llevar a procesos computacionales poco eficientes. Estas dificultades incentiva el uso del algoritmo EM.

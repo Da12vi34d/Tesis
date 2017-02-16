@@ -1,0 +1,61 @@
+\chapter{Introducción al paradigma bayesiano de inferencia} 
+En este capítulo se hablará brevemente sobre los antecedentes del paradigma bayesiano de inferencia, así como de algunas ideas principales que dieron
+origen a este. Y así, concluir en cómo es la estimación bayesiana, la cual es fundamental en este trabajo.
+
+\section{Antecedentes}
+
+En 1763, dos años después de la muerte de Thomas Bayes $(1702-1761)$, se publicó uno de sus ensayos, el cual consistió en resolver un problema de información inversa planteado por Jacob Bernoulli (An Essay towards solving a Problem in the Doctrine
+of Chances). El problema de Bernoulli consitia en obtener información sobre la realización de variables aleatorias independientes distribuidas Bernoulli; para ello, Bayes propuso en su ensayo un método que consistia en tener una suposición sobre la posibilidad de que un evento que tenga que ocurrir, algunas veces ocurra con éxito y otras veces no ocurra (o sea, un fracaso).
+
+En este punto de la historia, las ideas de Bayes carecian de claridad, pero diez años más tarde se esclarecieron debido a que Laplace las retomó, dandole así forma al paradigma Bayesiano de inferencia. Dichas ideas se consolidaron en su libro Theoriè analytique des probabilitès, 1812. Pero el trabajo de Laplace (concerniente al paradigma Bayesiano) aún carecia de formalidad teórica.
+
+El paradigma bayesiano de inferencia cuntinuó eclipsado, hasta que Harold Jeffrey (Theory of probability, 1939), y Bruno De Finetti (La Prévision, ses Lois Logiques, ses Sources Subjectives, 1937) desarrollaron y dieron sustento teórico al paradigma bayesiano. Harold Jeffrey mantuvo una postura objetiva dentro del paradigma bayesiano, ya que el decía que la información inicial era capturada objetivamente mediante el uso de distribuciones no informativas. Por otro lado, De Finetti mantuvo una postura subjetiva, ya que en su obra se desarrolla la teoría de probabilidad refiriendose a esta como un grado un grado de creencia.
+
+Hasta la fecha, el paradigma bayesiano sigue introduciendose en distintos campos de la ciencia, ya que es una gran herramienta en de inferencia o predicción, lo cuál es de vital interés en ciertos ámbitos de la vida humana, como en finanzas, econometría, actuaría, por ejemplo (en Savage (1972) o Lindley (1957) se puede encontrar una explicación más profunda del paradigma bayesiano de inferencia). 
+
+Ahora, teniendo un contexto sobre la evolución del paradigma bayesiano, veamos cuales son sus principios técnicos, y la idea que hay en estos.
+
+\section{Proceso de aprendizaje}  
+
+Supongamos que tenemos un conjunto de eventos $A_{1}$, $A_{2}$, . . ., $A_{n}$, de los cuales nos gustaría hacer inferencia de acuerdo a una función de probabilidad, $P$, (referente a estos eventos), y con un nivel de información o evidencia disponible, el culal denotaremps por $B$. Con estos elementos podemos definir nuestro estado de información actual sobre los eventos $A_{1}$, $A_{2}$, . . ., $A_{n}$, dada nuestra información inicial $B$, lo cual queda expresado, para cualquier $A_{i}$, como: $P(A_{i}|B)$, donde $\sum_{i=1}^{n}A_{i}=1$.
+
+Ahora, lo que nos interesa es actualizar nuestro nivel de información actual dada nueva información, digamos $C$, lo cual lo conseguimos de la siguiente manera utilizando la definición de probabilidad condicional \cite{Ross_Book},
+\begin{eqnarray}
+	P(A_{i}|C \wedge B)&=&\frac{P(A_{i} \wedge C \wedge B)}{P(C \wedge B)} \nonumber \\
+	&=& \frac{P(A_{i} \wedge B)}{P(B)} \frac{P(B)}{P(C \wedge B)} \frac{P(C \wedge A_{i} \wedge B)}{P(A_{i} \wedge B)} \nonumber\\
+	&=& P(A_{i}|B)P(C | A_{i} \wedge B)/P(C | B) \nonumber\\
+\end{eqnarray} 
+
+La ecuación anterior representa la idea de proceso de aprendizaje, o sea, dado el nivel de evidencia inicial denotado por $B$, mediante la incorporación de nueva información donotada por $C$, podemos actualizar nuestras creencias que ya teniamos con respecto al evento $A_{i}$, es decir, pasar de solamente tener $P(A_{i}|B)$ a $P(A_{i}|B \wedge C)$.
+
+\section{El proceso de aprendizaje en la inferencia estadística}
+
+Aplicando las ideas de la sección anterior, podemos incorporar nueva información en una distribución de probabilidad paramétrizada, cuyo parámetro es desconocido para nosotros. Este desconocimiento del verdadero valor del parámetro lo incorporamos en un distribución de probabilidad propia del parámetro desconocido. Por notación nos referimos a la distribución de probabilidad del parámetro como distribución inicial, y la denotamos como : $\Pi(\theta)$, donde $\theta$ es el parámetro descocnocido el cual pertenece a un espacio parametral $\Theta$.
+
+Dicho lo anterior, dada una variable aleatoria $X$ con distribución de densidad de probabilidad parametrizada por algún parámetro $\theta$, tenemos la distribución $f_{X}(x|\theta)$ la cual se lee como distribución de $X$ dado $\theta$. Después, incorporando nuestro desconocimiento de $\theta$, con $\Pi(\theta)$ podemos formular la siguiente expresión:
+
+\begin{eqnarray}
+	\Pi(\theta|X)&=&\frac{f(x \wedge \theta)}{f(x)}\nonumber\\
+	&=&\frac{f(x \wedge \theta)}{f(x)} \frac{\Pi(\theta)}{\Pi(\theta)}\nonumber\\
+	&=&f(x|\theta)\frac{\Pi(\theta)}{f(X)}
+\end{eqnarray}
+
+De la ecuación $(2.2)$ podemos tener la siguiente expresión $\Pi(\theta|X) \propto f(x|\theta)\Pi (\theta)$. La parte derecha de la expresión anterior se conoce como distribución a posteriori de $\theta$, esta se puede interpretar como la actualización del nivel de información que teniamos de $\theta$ (dicho nivel de información está considerado en $\Pi(\theta)$), al incluir nueva información proveniente de la realización (o realizaciones) de la variable aleatoria $X$. 
+
+La información proveniente de la variable aleatoria $X$ queda capturada por su función de densiadad condicionada por $\theta$, es decir, $f(x|\theta)$; también a esta densiadad condicionada la conocemos como función de verosimilitud.El símbolo $\propto$ nos indica que la expresión de la izquierda es proporcional a la de la derecha, es decir, sólo difieren por una constante que no depende del argumento de la parte izquierda.
+
+La expresión $(2.2)$ también nos da un algoritmo recursivo, el cual nos permite mejorar nuestra información del parámetro $\theta$ conforme más información obtengamos de la variable aleatoria $X$, es decir, si consideramos una nueva ralización de $X=x*$, entonces nuestras nueva distribución apriori o inicial es $\Pi(\theta|x)$, mientras que la distribució a posteriori (o actualizada) queda dada como $\Pi(\theta|x \wedge x*)$, por lo que mediante un proceso análogo a $(2.2)$ tendriamos la siguiente expresión:
+\begin{equation}
+	\Pi(\theta|x \wedge x*)\propto f(x\wedge x*|\theta) \Pi(\theta|x \wedge x*)
+\end{equation}
+
+\section{Predicción}
+
+Hasta ahora hemos visto cómo incorporar nueva información de la variable aleatoria $X$ para actualizar la información deisponible del parámetro $\theta$. Pero también podemos formularnos la siguientes preguntas ¿Qué pasa con el próximo valor de $X$ dados los valores $x$ que ya fueron observados? ¿Hay forma de que la infromación previa de $X$ sea incorporada para mejorar el nivel de información de futuras realizaciones? 
+La respuesta a las preguntas anteriores tiene connotación positiva, y queda representada por la siguiente expresión:
+\begin{eqnarray}
+	f(y*|\overline{y})&=&\int_{S_{\theta}}f(y* \wedge \theta |\overline{y})d\theta\nonumber\\
+	&=&\int_{S_{\theta}}f(y* | \theta \wedge \overline{y})\Pi(\theta) d\theta,
+\end{eqnarray}  
+donde $y*$ representa la realización futura de $Y$, $\overline{y}$ representa un conjunto de realizaciones
+observadas de $Y$, y $\theta$ el parámetro de la distribución de probabilidad de $Y$.

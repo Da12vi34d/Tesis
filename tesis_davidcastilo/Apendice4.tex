@@ -1,0 +1,136 @@
+
+\section{Simulación de distribuciones tipo mezcla normal en esperanza varianza}
+Para generar distribuciones tipo mezcla normal en esperanza varianza basta con seguir los siguieentes pasos:
+
+\begin{enumerate}
+	\item Proponer valores para el vector de medias $\mu$, el vector de sesgo $\beta$, y la matriz de varianza-covarianza $\Sigma$.	
+	\item Simular una realización de una variable aleatoria con soporte en los reales positivos, esta será nuestra variable de mezcla $u$.
+	\item Realizar una simulación de $X$, donde $X$ se distribuye normal con vector de medias $\mu + u\beta$ y matriz de varianza-covarianza $\Sigma$.
+	\item Realizar los pasos $2$) y $3$) hasta obtener la muestra deseada.
+	 
+\end{enumerate}
+\section{Distribución tipo mezla normal p variada}
+Se dice que el vector aleatorio $X\in R^{p}$ con densidad f(x) puede ser expresado como una distribución de mezcla normal $N(X|\mu,\beta,\Sigma)$ con variable de mezcla $u$ con densidad $f(u)$ y soporte en $R^{+}$, si:
+\begin{equation*}
+f(X|\mu,\beta,\Sigma)=\underset{0}{\overset{\infty }{\int }}N_{p}(X|\mu,u\beta,u\Sigma)f_{u}(u)du 
+\end{equation*}
+
+Donde, $N_{p}(X|\mu,u\beta,u\Sigma)$ es una distribución normal p-variada con vector de medias $\mu+u\beta$, y matriz de varianza-covarianza $u\Sigma$
+
+\section{Covarianza de un vector aleatorio p variado}
+Se define la covarianza de un vector aleatorio p variado como:
+\begin{equation*}
+COV(X)=E((X-\mu)(X-\mu)')
+\end{equation*}
+Siempre y cuando el vector de medias (del vector aleatorio $X$) $\mu$ exista.
+
+\section{Covarianza de una distribución tipo mezcla}
+Sea $X$ dado $u$ una distribución tipo mezcla de dimención p, y $u$ una variable de mezcla con soporte
+en $R_{+}$, entonces la covarianza de $X$ se puede calcular como:
+\begin{equation*}
+COV(X)=E_{u}(COV(X|u))-COV_{u}(E(X|u))
+\end{equation*}
+Demostración:
+De la definición de $COV(X)$ tenemos que:
+\begin{eqnarray*}
+COV(X)& = &E_{x}((X-\mu)(X-\mu)') \\
+& =&E_{x}(XX'-2X\mu+\mu\mu')\\
+& =&E_{x}(XX')-2E(X)\mu+\mu\mu' \\
+& =&E_{x}(XX')-E_{x}(X)E_{x}(X)' \\
+&= &E_{x}(XX')-E(X)_{x}E_{x}(X)'+E(X)_{x}E(X)_{x}'-\\
+& &2E(X)_{x}E(X)_{x}'+E(X)_{x}E(X)_{x}\\
+&= &E_{u}(E_{x}(XX'|u)-E_{x}(X|u)E_{x}(X|u)')+\\
+& & E_{u}(E_{x}(X|u)E_{x}(X|u)') -2E_{u}(E_{x}(X|u)E(X)')\\
+& & +E_{u}(E(X|u))E_{u}(E(X|U))\\
+&= &E_{u}(E_{x}(XX'|u)-2E_{x}(X|u)E_{x}(x|u)'+
+ \\
+& &  E_{x}(X|u)E_{x}(X|u)') + E_{u}(E_(X|u)E_{x}(X|u)'\\
+& & -2E_{x}(X|u)E_{u}(E_{x}(X|u))+\\
+\end{eqnarray*}
+\begin{eqnarray*}
+& & E_{u}E_{x}(X|u)E_{u}E_{x}(X|u)') \\
+&= &E_{u}(E_{x}(XX'-2XE_{x}(X|u)  \\
+& & +E_{x}(X|u)E_{x}(X|U)) + \\
+& & E_{u}((E_{x}(X|u)-E_{u}(E_{x}(X|u)))
+\\
+& & (E_{x}(X|u)-E_{u}(E_{x}(X|u)))')\\
+&= &E_{u}((E_{x}(X)-E_{x}(X|u))(E_{x}(X)-E_{x}(X|u))') +  \\
+& & COV_{u}(E_{x}(X|u))\\
+& =&E_{u}(COV_{x}(X|u)) + COV_{u}(E_{x}(X|u)).
+ \\
+\end{eqnarray*}
+
+\section{Kernel de una distribución normal p variada}
+El kernel un vector aleatorio es la parte de la función de densidad que únicamente depende de dicho vector, y a su vez nos permite identificar de que familia proviene la distribución. Por ejemplo, en el caso de la distribución normal p variada
+\begin{eqnarray*}
+f(X|\mu,\Sigma)& =& \dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}\\
+& &exp(-\dfrac{1}{2}(x'\Sigma^{-1}x - x'\Sigma^{-1}\mu -\mu'\Sigma^{-1}x+\mu'\Sigma^{-1}\mu))
+ \\
+\end{eqnarray*}
+
+Tenemos que el Kernel correspondiente es:
+\begin{equation*}
+exp(-\dfrac{1}{2}(x'\Sigma^{-1}x -2x'\Sigma^{-1}\mu))
+\end{equation*}
+donde $\mu'\Sigma^{-1}x=x'\Sigma^{-1}\mu$, ya que es una forma cuadrática.
+
+\section{Kernel de una distribución Wishart}
+Análogamente al caso normal p variado, si nos concentramos en la parte de la densidad Wishart, con matriz de escala $S$ y con n grados de libertad, que únicamente depende de $\Sigma$, tenemos que el correspondiente kernel es:
+\begin{equation*}
+\dfrac{\exp(-\frac{1}{2}tr(\Sigma^{-1}S))}{|\Sigma|^{\frac{n}{2}}}
+\end{equation*}
+
+\section{Kernel del producto de n distribuciones normales p variadas con mismo vector de medias y misma matriz de varianza covarianza}
+Supongamos que $X_{i}$ se distribuye normal p variada con vector de media $\mu$ y matriz de varianza covarianza $\Sigma$, entonces la función de  interés es de la siguiente manera:
+\begin{equation*}
+\prod_{i=1}^{n}N(X_{i}|\mu,\Sigma)=\prod_{i=1}^{n}\dfrac{1}{(2\Pi)^{p/2}|\Sigma|^{1/2}}exp(-\frac{1}{2}(X_{i}-\mu)'\Sigma^{-1}(X_{i}-\mu))
+\end{equation*}
+De aquí, trabajando únicamente con el exponente de la función exponencial tenemos que:
+\begin{eqnarray*}
+& &\prod_{i=1}^{n}exp(-\frac{1}{2}(X_{i}-\mu)'\Sigma^{-1}(X_{i}-\mu))= \\
+& &exp(-\frac{1}{2}\sum_{i=1}^{n} (X_{i}-\mu)'\Sigma^{-1}(X_{i}-\mu))= \\
+& &exp(-\dfrac{1}{2}\sum_{i=1}^{n}(X_{i}'\Sigma^{-1}X_{i}-2X_{i}'\Sigma^{-1}\mu+\mu'\Sigma^{-1}\mu))= \\
+& &exp(-\frac{1}{2}(X'\Sigma^{-1}X-2X'\Sigma^{-1}\mu+n\mu\Sigma^{-1}\mu))
+ \\
+\end{eqnarray*}
+
+Donde la jésima coordenada del vector X es $\sum_{i=1}^{n}X_{i,j}$
+Por último,como sólo nos interesan los términos donde aparece $X_{i}$, llegamos a que el kernel es:
+\begin{equation*}
+exp(-\frac{1}{2}(X'\Sigma^{-1}X-2X'\Sigma^{-1}\mu))
+\end{equation*} 
+
+\section{Kernel del vector de medias de una distribución normal p variada multiplicada por la distribución del vector de medias}
+
+En este caso tenemos que $X$ se ditribuye normal con vector de medias $\mu$ y matriz de varianza covarianza $\Sigma$, mientras que $\mu$ se distribuye normal con vector de medias $\mu_{0}$ y matriz de varianza covarianza $\Sigma_{0}$, y ahora nos interesa conocer el Kernel correspondiente a $\mu$, entonces tendríamos
+que el producto de las funciones de densidad es:
+\begin{equation*}
+f_{X}(X|\mu,\Sigma)f_{\mu}(\mu|\mu_{0},\Sigma_{0})=    
+\end{equation*}
+\begin{equation*}
+\dfrac{exp(-1/2(X-\mu)'\Sigma^{-1}(X-\mu))}{(2\Pi)^{p/2}|\Sigma|^{1/2}}       \dfrac{exp(-1/2(\mu-\mu_{0})'\Sigma_{0}^{-1}(\mu-\mu_{0}))}{(2\Pi)^{p/2}|\Sigma_{0}|^{1/2}}
+\end{equation*}
+
+Luego de cada función de densidad tomamos lo que dependa de $\mu$, para así obtener sus respectivos kerneles según el anexo 4,lo cual implica que:
+
+\begin{eqnarray*}
+& &Kernel = \\
+& &exp(-\dfrac{1}{2}(\mu'\Sigma^{-1}\mu -2x'\Sigma^{-1}\mu))exp(-\dfrac{1}{2}(\mu'\Sigma_{0}^{-1}\mu -2\mu_{0}'\Sigma_{0}^{-1}\mu))=
+ \\
+& &exp(-\dfrac{1}{2}(\mu'\Sigma^{-1}\mu -2x'\Sigma^{-1}\mu + \mu'\Sigma_{0}^{-1}\mu -2\mu_{0}'\Sigma_{0}^{-1}\mu))=
+ \\
+& &exp(-\frac{1}{2}(\mu'(\Sigma^{-1}+\Sigma_{0}^{-1})\mu-2(X'\Sigma^{-1}+\mu_{0}'\Sigma_{0}^{-1})\mu)=
+ \\
+& &exp(-\frac{1}{2}(\mu'(\Sigma^{-1}+\Sigma_{0}^{-1})\mu-2(X'\Sigma^{-1}+\mu_{0}'\Sigma_{0}^{-1})(\Sigma^{-1}+\Sigma_{0}^{-1})^{-1} \\
+& &(\Sigma^{-1}+\Sigma_{0}^{-1})\mu))
+ \\
+\end{eqnarray*}
+De aquí se tiene que $\mu$ se distribuye normal p variada con matriz de varianza covarianza $\Sigma + \Sigma_{0}$, y vector de medias $(X'\Sigma^{-1}+\mu_{0}'\Sigma_{0}^{-1})(\Sigma^{-1}+\Sigma_{0}^{-1})^{-1}$
+
+\section{Probabilidad condicional} \label{A.Ross}
+La probabilidad condicional se define de la siguiente manera \cite{Ross_P}:
+
+Si $P(F)>0)$, entonces:
+\begin{equation*}
+P(E\ F)=\frac{P(E\bigwedge F)}{P(F)}
+\end{equation*}

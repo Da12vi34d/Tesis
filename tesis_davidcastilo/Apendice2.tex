@@ -1,0 +1,25 @@
+\chapter{Algoritmo EM}
+El algoritmo Expectation Maximization (EM) fue formalizado por Dempster
+et al (1977); este algoritmo tiene un enfoque frecuentista, y tiene como objetivo encontrar los estimadores máximo verosímiles de funciones de densidad con datos no observados, lo cual es ideal para manejar distribuciones tipo mezcla, pues la variable de mezcla toma el lugar de los datos no observados.  
+
+Para implementar el algoritmo EM se requiere un conjunto de datos u observaciones $x_{i}$, de las cuales se conoce su función paramétrica de densidad; el parámetro de dicha distribución, $\Theta$, es desconocido y es lo que se pretende estimar; también se requiere la distribución, parametrizada por $\Theta$, de los datos no observados y finalmente una suposición inicial, $\Theta^{0}$, sobre el parámetro $\Theta$. 
+
+De manera intuitiva, el algorimo EM se desarrolla de la siguiente forma:llamemos a la función de densidad asociada a $x_{i}$ como $f(x_{i}|\Theta)$, después supongamos que existen datos no observados $z$, y una función determinista $H(.)$ que tiene como dominio los datos no observados y como imagen los datos observados. Esto es, que para cada dato no observado se cumple que $H(Z_{s})=x_{i}$, para $Z_{s}$ un subconjunto de $Z$. Luego nos interesaría encontrar el valor de $\Theta$ que maximiza la probabilidad
+de haber obtenido los datos no observados dado $\Theta$, pero justamente no conocemos los datos no observados $X$, por lo que la probabilidad anterior la ponderamos por la probabilidad de haber obtenido los datos no observados dados los datos sí observados y la suposición inicial del parámetro de interés, luego nos interesa maximizar $f(Z|\Theta ) f(Z|X,\Theta^{0})$, lo cual no nos libra del problema de los datos no observados. Entonces, nos fijamos en un promedio de todas las posibles posibilidades de $Z$, por lo que nuestra función a maximizar con respecto a $\Theta$ se convierte en:
+
+\begin{equation*}
+E_{Z}[f(Z|\Theta)]=\int_{Z}f(Z|\Theta)f(Z|X,\Theta^{0})dz
+\end{equation*}
+
+Por último, si se define a la esperanza descrita previamente como una función de $\Theta$, es decir, que $Q(\Theta|\Theta^{0})=E_{Z}[f(Z|\Theta)]$, entonces el problema planteado se resume en dado un valor $\Theta^{0}$, maximizar con respecto a $\Theta$ la función $Q(\Theta|\Theta^{0})$. De esta forma se crea un proceso iterativo, donde el valor $\Theta^{*}$ que maximiza la función $Q(.)$ se convierte ahora en $\Theta^{0}$, y el procedimiento se repite de nuevo; de esta forma se asegura que la esperanza converge a la verosimilitud buscada, y a su vez, $\Theta^{*}$ converge al estimador máximo verosímil. (citar dónde viene la demostración de esto)
+
+En términos generales el estimador máximo verosimil a través del algoritmo EM se construye de la siguiente manera:
+
+\begin{enumerate}
+	\item Dar un valor inicial $\Theta^{0}$.
+	\item Obtener las funciones de densidad $f(Z|\Theta)$, $f(Z|X,\Theta^{0})$.
+	\item Calcular $Q(\Theta|\Theta^{0})=E_{Z}[f(Z|\Theta)]$, algunas veces resulta más sencillo calcular $E_{Z}[log(f(Z|\Theta))]$.
+	\item Maximizar $Q(\Theta|\Theta^{0})$. 
+	\item Una vez obtenido $\Theta^{*}$ sustituir por $\Theta^{0}$, y repetir los pasos $3$, $4$ y $5$, hasta que el algoritmo converja.
+	 
+\end{enumerate}

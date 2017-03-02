@@ -1,6 +1,8 @@
 # Llamando las funciones adecuadas
 # Kernel de la variable latente
 # setwd("C:/Users/David/Desktop")
+rm(list=ls())
+
 setwd("C:/JCMO.Trabajo/@Estudiantes/David Castillo/Tesis/Algoritmo_Final")
 getwd()
 ptm <- proc.time()
@@ -25,6 +27,7 @@ library(LaplacesDemon)
 #Observaciones
 #r<-array(1,dim=c(p,n))
 datos<-read.csv("datos.txt",header=TRUE,sep=",") #Cargamos los datos a usar
+head(datos)
 datos1<-datos[1000:nrow(datos),2:4] #Quitamos los valores que no nos interean
 r<-t(datos1) #Transponemos la base de datos
 #nrow(datos2)
@@ -74,7 +77,7 @@ u<-rep(.1, times=n)
 #-------------------------------------------
 #algoritmo recursivo
 for (j in 1:M){
-  
+  print(paste("Iteracion: ",j,sep=" - "))
   #par???metros correspondientes a la distribuci???n normal
   i<-0
   P<-0
@@ -166,3 +169,5 @@ for (j in 1:M){
   urep[,j]<-u
 }
 proc.time() - ptm
+
+save.image(file="tesis_davidcastillo.Rdata")
